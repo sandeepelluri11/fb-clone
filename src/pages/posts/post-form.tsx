@@ -6,6 +6,8 @@ import { db } from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../config/firebase';
 import { useNavigate } from 'react-router-dom';
+import { Button, Container, TextField, Typography } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 interface FormData {
     title: string;
@@ -41,15 +43,15 @@ export const PostForm = () => {
     }
 
     return (
-        <div>
+        <Container>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type='text' placeholder='title' {...register("title")}></input> <br />
-                <p>{formState.errors.title?.message}</p>
-                <textarea placeholder='description' {...register("description")}></textarea> <br />
-                <p>{formState.errors.description?.message}</p>
-                <input type='submit'></input>
+                <TextField variant='outlined' label="title" fullWidth {...register("title")} sx={{marginBottom: 2, marginTop: 2}}/> <br />
+                <Typography sx={{color: "red"}}>{formState.errors.title?.message}</Typography>
+                <TextField variant='outlined' label="description" fullWidth multiline rows={4} {...register("description")} sx={{marginBottom: 2, marginTop: 2}}/>
+                <Typography sx={{color: "red"}}>{formState.errors.description?.message}</Typography>
+                <Button type='submit' variant='contained' endIcon={<ArrowForwardIosIcon fontSize='small' />}>create</Button>
             </form>
-        </div>
+        </Container>
     );
 
 }

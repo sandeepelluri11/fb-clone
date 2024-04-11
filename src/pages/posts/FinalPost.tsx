@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc } from "@firebase/firestore";
+import { Container, IconButton, Typography } from "@mui/material";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 interface Props {
     post: Post
@@ -53,17 +56,18 @@ export const FinalPost = (props: Props) => {
         getLikes();
     },[likeCount]);
 
-    const userLiked = likeCount?.find((like) => like.userid==user?.uid)
+    const userLiked = likeCount?.find((like) => like.userid===user?.uid)
 
     return (
-        <div style={{backgroundColor: "skyblue", backgroundPositionY: 20}}>
-            <h1>@{props.post.username}</h1>
-            <h1>{props.post.title}</h1>
-            <h1>{props.post.description}</h1>
-            <button onClick={setLike}>{userLiked ? <>&#128078;</> : <>&#128077;</>}</button>
-            {likeCount?.length!==0 && <h1>Likes: {likeCount?.length}</h1>}
-            <br />
-        </div>
+
+        <Container sx={{backgroundColor: "lightgreen",marginBottom: 2}}>
+
+            <Typography variant="h3" color="primary">@{props.post.username}</Typography>
+            <Typography variant="h3" color="primary">{props.post.title}</Typography>
+            <Typography variant="h3" color="primary">{props.post.description}</Typography>
+            <IconButton onClick={setLike}>{userLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
+            {likeCount?.length!==0 && <Typography variant="h5">Likes: {likeCount?.length}</Typography>}
+        </Container>
     );
 
 }

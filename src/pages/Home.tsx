@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "../config/firebase";
 import { FinalPost } from "./posts/FinalPost";
+import { Container, Typography } from "@mui/material";
 
 export interface Post {
     id: string;
@@ -33,10 +34,13 @@ export const Home = () => {
 
     return (
         <div>
-            <h1>Welcome {user?.displayName}</h1>
-            {user && postsList?.map((post: Post) => {
-                return <FinalPost post= {post} />
-            })}
+            <Container>
+                {user ? <Typography variant="h3" ml={33} mt={2}>Welcome {user?.displayName}</Typography> 
+                : <Typography variant="h3" ml={40} mt={2}>Login to continue</Typography>}
+                {user && postsList?.map((post: Post) => {
+                    return <FinalPost post= {post} />
+                })}
+            </Container>
         </div>
     );
 }

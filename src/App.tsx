@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Navbar } from './components/Navbar';
@@ -13,16 +12,16 @@ function App() {
 
   return (
     <div className="App">
-      <QueryClientProvider client={client}>
-        <Router>
-          <Navbar />
-            <Routes>
-              <Route path='/' element={<Home />}/>
-              <Route path='/login' element={<Login />}/>
-              <Route path='/createpost' element={<CreatePost />}/>
-            </Routes>
-        </Router>
-      </QueryClientProvider>
+        <QueryClientProvider client={client}>
+          <Router>
+            <Navbar />
+              <Routes>
+                <Route path='/' element={<Home />}/>
+                <Route path='/login' element={<Login />}/>
+                <Route path='/createpost' element={<CreatePost />}/>
+              </Routes>
+          </Router>
+        </QueryClientProvider>
     </div>
   );
 }
